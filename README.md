@@ -38,7 +38,7 @@ The command interpreter exists for the following reasons:
 Details about the installation process will be updated soon.
 
 ## Usage
-Details about how to use the platform will be updated soon.
+npm run dev
 
 ## Contribution
 UniFace welcomes contributions from its community. If you'd like to contribute, please review our contribution guidelines (link to be added).

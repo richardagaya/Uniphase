@@ -70,6 +70,24 @@ on the class name\n"""
 
     def do_destroy(self, *args):
         """Destroys an object\n"""
+        """ Prints the string representation of an instance based on the
+class name and id\n"""
+        if not args or args[0].strip() == "":
+            print("** class name missing **")
+        else:
+            arguments = args[0].strip().split()
+            if len(arguments) != 2:
+                print("** instance id missing **")
+            else:
+                if arguments[0] in self.command_dict:
+                    all_objects = storage.all()
+                    instance_id = '{}.{}'.format(arguments[0], arguments[1])
+                    if instance_id in all_objects:
+                        del all_objects[instance_id]
+                        storage.save()
+                    pass
+                else:
+                    print("** class doesn't exist **")
         pass
 
     def do_quit(self, line):
