@@ -9,19 +9,31 @@ class FileStorage():
     File storage for created objects
     """
     def __init__(self):
+        """
+        Initializes the file path and loads the file content
+        """
         self.__file_path = 'p_storage.json'
         self.__objects = {}
         self.reload()
 
     def all(self):
+        """
+        Returns all the data in the json file
+        """
         return self.__objects
 
     def new(self, obj):
+        """
+        Serializes the object before adding to the objects dictionary
+        """
         serialized_obj = obj.to_dict()
         self.__objects['{}.{}'.format(obj.__class__.__name__,
                                       obj.id)] = serialized_obj
 
     def save(self):
+        """
+        Reads contents from json file and deserializes to dict 'objects'
+        """
         with open(self.__file_path, mode='w', encoding='utf-8') as file1:
             json.dump(self.__objects, file1)
 
