@@ -5,6 +5,7 @@ The console module for managing objects
 import cmd
 import sys
 from models.base_model import BaseModel
+from models import storage
 from models.user import User
 
 
@@ -22,6 +23,7 @@ class UFCommand(cmd.Cmd):
                 line = line.lower()
         return line
 
+
     def do_create(self, *args):
         """Creates an object\n"""
         if not args or args[0].strip() == "":
@@ -30,10 +32,10 @@ class UFCommand(cmd.Cmd):
             command = args[0].strip()
             if command not in self.command_dict:
                 print("** class doesn't exist **")
-            else:                      
+            else:
                 my_model = self.command_dict[command]()
                 my_model.save()
-            
+
     def do_show(self, *args):
         """ Prints the string representation of an instance based on the
 class name and id\n"""
@@ -45,6 +47,11 @@ class name and id\n"""
                 print("** instance id missing **")
             else:
                 if arguments[0] in self.command_dict:
+                    all_objects = storage.all()
+                    instance_id = '{}.{}'.format(arguments[0], arguments[1])
+                    if instance_id in all_objects:
+                        instance_obj = all_objects[instance_id]
+                        print(instance_obj)
                     pass
                 else:
                     print("** class doesn't exist **")
